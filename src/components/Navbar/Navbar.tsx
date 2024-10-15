@@ -1,4 +1,4 @@
-import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -39,11 +39,7 @@ const Navbar: React.FC = () => {
       >
         {/* Logo Section */}
         <Box>
-          <Image
-            src={logoImg}
-            alt="Federación Sanluiseña de Deportes Acuáticos"
-            h="60px"
-          />
+          <Image src={logoImg} alt="FeSDA" h="60px" />
         </Box>
 
         {/* Hamburger Menu for Mobile */}
@@ -59,12 +55,17 @@ const Navbar: React.FC = () => {
         <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
           {links.map((link) => (
             <Link
+              as={NavLink}
               key={link.name}
+              to={link.href}
               px={2}
               py={1}
               rounded="md"
               _hover={{ bg: "gray.100" }}
-              href={link.href}
+              _activeLink={{
+                bg: "blue.600",
+                color: "white",
+              }}
               color="gray.700"
             >
               {link.name}
@@ -79,12 +80,17 @@ const Navbar: React.FC = () => {
           <Stack as="nav" spacing={4}>
             {links.map((link) => (
               <Link
+                as={NavLink}
                 key={link.name}
+                to={link.href}
                 px={2}
                 py={1}
                 rounded="md"
                 _hover={{ bg: "gray.100" }}
-                href={link.href}
+                _activeLink={{
+                  bg: "blue.600",
+                  color: "white",
+                }}
                 color="gray.700"
               >
                 {link.name}

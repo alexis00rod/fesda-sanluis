@@ -15,7 +15,7 @@ const App = () => {
     <>
       <Flex direction="column" minHeight="100vh">
         <Navbar />
-        <Box as="main" flex="1" width="100%" maxW="1200px" mx="auto" px={4}>
+        <Box as="main" flex="1" width="100%" maxW="1200px" mx="auto" px={4} display="flex" flexDirection="column">
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/federacion" element={<Federacion />} />

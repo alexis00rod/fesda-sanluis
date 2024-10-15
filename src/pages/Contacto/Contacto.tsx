@@ -43,7 +43,16 @@ const Contacto: React.FC = () => {
   };
 
   return (
-    <Box maxW="1200px" mx="auto" mt={8} px={4}>
+    <Box
+      width="100%"
+      maxW="1200px"
+      mx="auto"
+      px={4}
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      flex="1"
+    >
       <ScrollFadeIn>
         <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={8}>
           {/* Información de contacto */}

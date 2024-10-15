@@ -231,7 +231,7 @@ const Footer = () => {
         </Grid>
 
         {/* Footer Bottom Text */}
-        <Box textAlign="center" mt={6}>
+        <Box textAlign="center" mt={6} px={4}>
           <Text>
             © {new Date().getFullYear()} Federación Sanluiseña de Deportes
             Acuáticos. Todos los derechos reservados.

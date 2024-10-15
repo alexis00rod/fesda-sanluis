@@ -8,16 +8,18 @@ import {
   Stack,
   Image,
   Link,
+  Collapse,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import logoImg from "../../assets/logo.png";
 
-type NavLink = {
+type NavLinkType = {
   name: string;
   href: string;
 };
 
-const links: NavLink[] = [
+const links: NavLinkType[] = [
   { name: "Inicio", href: "/" },
   { name: "Federación", href: "/federacion" },
   { name: "Competencias", href: "/competencias" },
@@ -27,6 +29,13 @@ const links: NavLink[] = [
 
 const Navbar: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // Cierra el menú al hacer clic en un enlace
+  const handleLinkClick = () => {
+    if (isOpen) {
+      onClose();
+    }
+  };
 
   return (
     <Box bg="white" px={4} shadow="md">
@@ -38,8 +47,8 @@ const Navbar: React.FC = () => {
         mx="auto"
       >
         {/* Logo Section */}
-        <Box>
-          <Image src={logoImg} alt="FeSDA" h="60px" />
+        <Box flex="none">
+          <Image src={logoImg} alt="FeSDA" h="60px" objectFit="contain" />
         </Box>
 
         {/* Hamburger Menu for Mobile */}
@@ -47,36 +56,83 @@ const Navbar: React.FC = () => {
           size="md"
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Abrir menú"
-          display={{ md: "none" }}
+          display={{ base: "flex", lg: "none" }} // Se muestra en pantallas de 834px o menos
           onClick={isOpen ? onClose : onOpen}
         />
 
-        {/* Links for Desktop */}
-        <HStack as="nav" spacing={4} display={{ base: "none", md: "flex" }}>
-          {links.map((link) => (
-            <Link
-              as={NavLink}
-              key={link.name}
-              to={link.href}
-              px={2}
-              py={1}
-              rounded="md"
-              _hover={{ bg: "gray.100" }}
-              _activeLink={{
-                bg: "blue.600",
-                color: "white",
-              }}
-              color="gray.700"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </HStack>
+        {/* Links and Social Media for Desktop */}
+        <Flex
+          alignItems="center"
+          as="nav"
+          display={{ base: "none", lg: "flex" }} // Se oculta en pantallas de 834px o menos
+          gap={4}
+        >
+          <HStack spacing={4}>
+            {links.map((link) => (
+              <Link
+                as={NavLink}
+                key={link.name}
+                to={link.href}
+                px={2}
+                py={1}
+                rounded="md"
+                _hover={{ bg: "gray.100" }}
+                _activeLink={{
+                  bg: "blue.600",
+                  color: "white",
+                }}
+                color="gray.700"
+                _focus={{ boxShadow: "outline" }}
+                _active={{ bg: "blue.600", color: "white" }}
+                onClick={handleLinkClick} // Cierra el menú al hacer clic
+              >
+                {link.name}
+              </Link>
+            ))}
+          </HStack>
+
+          {/* Social Media Icons */}
+          <HStack spacing={4} ml={4}>
+            <IconButton
+              as="a"
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              icon={<FaFacebookF />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#3b5998", color: "white" }}
+            />
+            <IconButton
+              as="a"
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              icon={<FaInstagram />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#E1306C", color: "white" }}
+            />
+            <IconButton
+              as="a"
+              href="https://wa.me/54123456789"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              icon={<FaWhatsapp />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#25D366", color: "white" }}
+            />
+          </HStack>
+        </Flex>
       </Flex>
 
       {/* Mobile Menu */}
-      {isOpen ? (
-        <Box pb={4} display={{ md: "none" }}>
+      <Collapse in={isOpen} animateOpacity>
+        <Box pb={4} display={{ lg: "none" }}>
           <Stack as="nav" spacing={4}>
             {links.map((link) => (
               <Link
@@ -92,13 +148,53 @@ const Navbar: React.FC = () => {
                   color: "white",
                 }}
                 color="gray.700"
+                _focus={{ boxShadow: "outline" }}
+                _active={{ bg: "blue.600", color: "white" }}
+                onClick={handleLinkClick}
               >
                 {link.name}
               </Link>
             ))}
           </Stack>
+
+          {/* Social Media Icons for Mobile */}
+          <Stack direction="row" spacing={4} mt={4}>
+            <IconButton
+              as="a"
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              icon={<FaFacebookF />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#3b5998", color: "white" }}
+            />
+            <IconButton
+              as="a"
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              icon={<FaInstagram />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#E1306C", color: "white" }}
+            />
+            <IconButton
+              as="a"
+              href="https://wa.me/54123456789"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              icon={<FaWhatsapp />}
+              colorScheme="gray"
+              variant="ghost"
+              _hover={{ bg: "#25D366", color: "white" }}
+            />
+          </Stack>
         </Box>
-      ) : null}
+      </Collapse>
     </Box>
   );
 };

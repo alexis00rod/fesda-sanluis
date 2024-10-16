@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Box, Text, Heading, Image, Flex } from "@chakra-ui/react";
 import { NoticiaType } from "../../../models/NoticiaType";
 import { ScrollFadeIn } from "../../../components";
+import { formatDate } from "../../../utils/formatDate";
 
 interface NoticiaItemProps {
   noticia: NoticiaType;
@@ -25,13 +26,6 @@ const NoticiaItem: React.FC<NoticiaItemProps> = ({ noticia }) => {
 
   const primeraImagen = getPrimerImagen(noticia.content);
 
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-  const formattedDate = noticia.date.toLocaleDateString("en-US", options);
-
   return (
     <ScrollFadeIn>
       <Link to={`/noticias/${noticia.id}`}>
@@ -53,7 +47,7 @@ const NoticiaItem: React.FC<NoticiaItemProps> = ({ noticia }) => {
                 alt={noticia.title}
                 w="100%"
                 h="100%"
-                objectFit="cover"
+                objectFit="contain"
                 transition="transform 0.3s ease"
                 _hover={{
                   transform: "scale(1.1)",
@@ -76,7 +70,7 @@ const NoticiaItem: React.FC<NoticiaItemProps> = ({ noticia }) => {
 
             {/* Fecha de publicación */}
             <Text fontSize="sm" color="gray.500" mb={4}>
-              {formattedDate}
+              {formatDate(noticia.date, "LL")}
             </Text>
 
             {/* Resumen con un máximo de 3 líneas */}

@@ -70,7 +70,7 @@ const NoticiaItem: React.FC<NoticiaItemProps> = ({ noticia }) => {
 
             {/* Fecha de publicación */}
             <Text fontSize="sm" color="gray.500" mb={4}>
-              {formatDate(noticia.date, "LL")}
+              {formatDate(noticia.date)}
             </Text>
 
             {/* Resumen con un máximo de 3 líneas */}

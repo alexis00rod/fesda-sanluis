@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { Navbar, Footer } from "../index";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   Admin,
   Competencias,
@@ -9,9 +10,14 @@ import {
   NoticiaDetalles,
   Noticias,
 } from "../../pages";
-import { Box, Flex } from "@chakra-ui/react";
+import { Navbar, Footer } from "../";
 
 const App = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <>
       <Flex direction="column" minHeight="100vh">

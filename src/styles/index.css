@@ -2,6 +2,14 @@ ul {
   list-style: none;
 }
 
+.hover-button {
+  display: none;
+}
+
+th:hover .hover-button {
+  display: inline-flex;
+}
+
 .fade-in {
   opacity: 0;
   transform: translateY(20px);

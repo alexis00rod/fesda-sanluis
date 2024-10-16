@@ -83,7 +83,7 @@ const NoticiaDetalles: React.FC = () => {
         <Box w="100%">
           <Text>{formatDate(noticia.date, "LL")}</Text>
         </Box>
-        <Heading as="h2" size="lg" mb={4}>
+        <Heading as="h1" size="lg" mb={4}>
           {noticia.title}
         </Heading>
 

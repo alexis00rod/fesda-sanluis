@@ -5,6 +5,6 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 dayjs.extend(localizedFormat);
 dayjs.locale("es");
 
-export const formatDate = (date: Date, format: string) => {
-  return dayjs(date).format(format);
+export const formatDate = (date: Date, format?: string) => {
+  return dayjs(date).format(format ? format : "LL");
 };
